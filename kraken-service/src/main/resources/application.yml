@@ -1,0 +1,41 @@
+spring:
+  profiles:
+    active: 'prod'
+  application:
+    name: 'kraken-service'
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    initialization-mode: 'always'
+  jpa:
+    properties:
+      hibernate:
+        default_schema: 'kraken_service'
+        jdbc:
+          time_zone: 'UTC'
+    hibernate:
+      ddl-auto: 'validate'
+  liquibase:
+    enabled: 'true'
+    change-log: 'classpath:liquibase/changelog/changelog.xml'
+    liquibaseSchema: 'kraken_service'
+    defaultSchema: 'kraken_service'
+
+
+##################
+server:
+  port: ${SERVER_PORT:8080}
+
+mafp:
+  srv-id: '7fffffff-ffff-ffff-0000-000000000003'
+  debug: ${MAFP_DEBUG:false}
+  role:
+    enable: ${ROLE_SERVICE_ENABLE:false}
+    url: ${ROLE_SERVICE_URL:http://localhost:8080}
+    cached: ${ROLE_SERVICE_CACHED:false}
+    jwt:
+      use: ${ROLE_SERVICE_JWT_USE:true}
+  tea:
+    enable: ${TEA_SERVICE_ENABLE:false}
+    url: ${TEA_SERVICE_URL:http://localhost:8080}
